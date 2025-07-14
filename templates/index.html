@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>AI 텍스트 요약기</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .summary-box {
+            margin-top: 30px;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .summary-box {
+            position: relative;
+            margin-top: 30px;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px 40px 20px 20px; /* 오른쪽 공간 확보 위해 패딩 오른쪽 넉넉히 */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 50%;
+            right: 10px; /* 오른쪽 끝에서 살짝 띄움 */
+            transform: translateY(-50%); /* 세로 중앙 정렬 */
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+            transition: color 0.3s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        .summary-box h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .summary-box p {
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 AI 텍스트 요약기</h1>
+
+        <form action="/summarize" method="post" autocomplete="off">
+            <textarea name="text" maxlength="1000" placeholder="여기에 긴 글을 붙여넣고 '요약하기'를 눌러보세요. 최대 1000자 입력 가능"></textarea>
+            <button type="submit">요약하기</button>
+        </form>
+
+ {% if summary %}
+    <div class="summary-box" id="summaryBox">
+        <button class="close-btn" onclick="closeSummary()">×</button>
+        <h2>🧠 요약 결과</h2>
+        <p>{{ summary }}</p>
+    </div>
+    {% endif %}
+
+    <script>
+        function closeSummary() {
+            const summaryBox = document.getElementById("summaryBox");
+            if (summaryBox) {
+                summaryBox.style.display = "none";
+            }
+        }
+    </script>
+    </div>
+</body>
+</html>
