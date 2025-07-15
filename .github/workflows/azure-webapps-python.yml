@@ -1,7 +1,7 @@
 name: Build and deploy Python app to Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: summarizer-b9e9fteuhvdnc9c2  # ✅ Azure 웹앱 이름 정확히 반영
+  AZURE_WEBAPP_NAME: summarizer
   PYTHON_VERSION: '3.8'
 
 on:
