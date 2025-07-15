@@ -9,6 +9,10 @@ app.add_middleware(SessionMiddleware, secret_key="your-secret-key")
 
 templates = Jinja2Templates(directory="templates")
 
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     summary = request.session.pop("summary", None)  # 한번 보여주고 삭제
